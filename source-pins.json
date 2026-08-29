@@ -3,7 +3,7 @@
   "sources": {
     "fiducia-cloud/fiducia-lambda-service.rs": {
       "branch": "main",
-      "sha": "625f169d2e79f2fcf16881e85cc88ce5d47fcc6f",
+      "sha": "170b2e6b66b6edccb04ff38adc01e0314d5ed447",
       "exists": true
     }
   }
