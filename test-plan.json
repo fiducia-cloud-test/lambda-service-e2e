@@ -26,7 +26,7 @@
       "fullName": "fiducia-cloud/fiducia-lambda-service.rs",
       "exists": true,
       "branch": "main",
-      "sha": "625f169d2e79f2fcf16881e85cc88ce5d47fcc6f",
+      "sha": "170b2e6b66b6edccb04ff38adc01e0314d5ed447",
       "visibility": "public"
     }
   ],
@@ -36,6 +36,9 @@
     "immutableSourcePins": true,
     "pullRequestCredentials": false,
     "leastPrivilege": true,
-    "redactSecretsAndRawMedia": true
+    "redactSecretsAndRawMedia": true,
+    "protectedSourceIntegration": true,
+    "protectedSourceIntegrationStatus": "not-executed-unless-protected-lane-runs",
+    "productOverlayPreserved": true
   }
 }
