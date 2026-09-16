@@ -1,0 +1,43 @@
+name: ores static generation certification
+
+on:
+  push:
+    branches:
+      - test/ores-static-generation
+    paths:
+      - ".github/workflows/ores-static-generation.yml"
+      - "tests/ores-static-generation/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  certify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Check out certification harness
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          show-progress: false
+          submodules: false
+
+      - uses: dtolnay/rust-toolchain@4be7066ada62dd38de10e7b70166bc74ed198c30 # stable
+        with:
+          toolchain: "1.88.0"
+          components: rustfmt, clippy
+
+      - name: Certify generator placement and static-route planning
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo generate-lockfile --manifest-path tests/ores-static-generation/Cargo.toml
+          cargo fmt --manifest-path tests/ores-static-generation/Cargo.toml -- --check
+          cargo clippy --locked --manifest-path tests/ores-static-generation/Cargo.toml -- -D warnings
+          cargo run --locked --manifest-path tests/ores-static-generation/Cargo.toml
