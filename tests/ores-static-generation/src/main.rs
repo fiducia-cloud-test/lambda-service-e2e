@@ -38,11 +38,16 @@ pub async fn generate_static_params() {}
     let route = &manifest.routes[0];
     assert_eq!(route.canonical_path, "/articles/{slug}");
     assert_eq!(route.render, "static_only");
-    assert_eq!(route.generator.as_deref(), Some("src/pages/articles/[slug]/gen.rs"));
-    assert!(outputs
-        .rerun_if_changed
-        .iter()
-        .any(|path| path.ends_with("src/pages/articles/[slug]/gen.rs")));
+    assert_eq!(
+        route.generator.as_deref(),
+        Some("src/pages/articles/[slug]/gen.rs")
+    );
+    assert!(
+        outputs
+            .rerun_if_changed
+            .iter()
+            .any(|path| path.ends_with("src/pages/articles/[slug]/gen.rs"))
+    );
     cleanup(root);
 }
 
